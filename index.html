@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Startup Student — Your Guide to College Entrepreneurship</title>
+    <meta name="description" content="Practical advice on how to succeed as a student entrepreneur. Sign up to be the first to know when the book launches.">
+    <meta property="og:title" content="The Startup Student">
+    <meta property="og:description" content="Practical advice on how to succeed as a student entrepreneur.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thestartupstudent.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --accent-hover: #d63851;
+            --light: #f8f9fa;
+            --text: #2d2d2d;
+            --text-muted: #6b7280;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: var(--white);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(233, 69, 96, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(233, 69, 96, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 720px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(233, 69, 96, 0.2);
+            border: 1px solid rgba(233, 69, 96, 0.4);
+            color: #ff8a9e;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #e94560, #ff6b81);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 540px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        /* Email Form */
+        .email-form {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .email-form input[type="email"] {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--white);
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .email-form input[type="email"]::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .email-form input[type="email"]:focus {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .email-form button {
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            white-space: nowrap;
+        }
+
+        .email-form button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .email-form button:active {
+            transform: translateY(0);
+        }
+
+        .form-note {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .success-message {
+            display: none;
+            padding: 1rem 1.5rem;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            color: #6ee7b7;
+            font-weight: 500;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+
+        .features-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 3.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #e94560, #ff6b81);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
+        }
+
+        .about-inner {
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: var(--white);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .email-form {
+                flex-direction: column;
+            }
+
+            .email-form button {
+                padding: 1rem;
+            }
+
+            .features {
+                padding: 4rem 1.5rem;
+            }
+
+            .cta {
+                padding: 4rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">Coming Soon</div>
+            <h1>The <span>Startup Student</span></h1>
+            <p>Practical advice on how to succeed as a student entrepreneur. Get notified when the book drops.</p>
+
+            <form class="email-form" id="signup-form">
+                <input type="email" name="email" placeholder="Enter your email" required autocomplete="email">
+                <button type="submit">Notify Me</button>
+            </form>
+            <div class="success-message" id="success-msg">
+                You're on the list! We'll let you know when the book launches.
+            </div>
+            <p class="form-note">No spam. Just a launch notification.</p>
+        </div>
+    </section>
+
+    <!-- What You'll Learn -->
+    <section class="features">
+        <div class="features-inner">
+            <p class="section-label">What's Inside</p>
+            <h2 class="section-title">Built for student entrepreneurs</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    </div>
+                    <h3>Practical Playbook</h3>
+                    <p>No theory fluff. Real tactics and frameworks you can apply to your startup this semester.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3>Expert Insights</h3>
+                    <p>Wisdom from founders, investors, and professors who've been in the trenches.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h3>Student-First</h3>
+                    <p>Written specifically for college students balancing classes, side hustles, and big ambitions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="about-inner">
+            <p class="section-label">About the Book</p>
+            <h2 class="section-title">Your unfair advantage starts here</h2>
+            <p>College is the best time to start a company. You have access to mentors, low living costs, a built-in network, and the freedom to take risks. But most students don't know where to begin.</p>
+            <p><strong>The Startup Student</strong> is the guide you wish you had on day one — packed with actionable advice on navigating entrepreneurship programs, building your mindset, avoiding common pitfalls, and actually launching something real.</p>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="cta">
+        <div class="cta-inner">
+            <h2>Don't miss the launch</h2>
+            <p>Be the first to get your copy. Drop your email and we'll notify you the moment it's available.</p>
+            <form class="email-form" id="signup-form-bottom">
+                <input type="email" name="email" placeholder="Enter your email" required autocomplete="email">
+                <button type="submit">Notify Me</button>
+            </form>
+            <div class="success-message" id="success-msg-bottom">
+                You're on the list! We'll let you know when the book launches.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 The Startup Student. All rights reserved.
+    </footer>
+
+    <script>
+        // Formspree-powered email collection (free: 50 submissions/month)
+        // Replace YOUR_FORM_ID below with your Formspree form ID.
+        // Sign up free at https://formspree.io — create a form and paste the ID here.
+        const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+
+        function handleSubmit(formId, successId) {
+            const form = document.getElementById(formId);
+            const successMsg = document.getElementById(successId);
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = form.querySelector('input[type="email"]').value;
+                const button = form.querySelector('button');
+                const originalText = button.textContent;
+
+                button.textContent = 'Sending...';
+                button.disabled = true;
+
+                try {
+                    const response = await fetch(FORMSPREE_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                        body: JSON.stringify({ email: email })
+                    });
+
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        successMsg.classList.add('show');
+                    } else {
+                        button.textContent = 'Try Again';
+                        button.disabled = false;
+                    }
+                } catch (err) {
+                    button.textContent = 'Try Again';
+                    button.disabled = false;
+                }
+            });
+        }
+
+        handleSubmit('signup-form', 'success-msg');
+        handleSubmit('signup-form-bottom', 'success-msg-bottom');
+    </script>
+</body>
+</html>
