@@ -15,9 +15,25 @@
   var aqEcho = document.getElementById('aq-echo');
   var aqCopy = document.getElementById('aq-copy');
   var aqX = document.getElementById('aq-x');
+  var runIt = document.getElementById('run-it');
   var aqValue = '';
 
   var DEFAULT_READOUT = aqReadout ? aqReadout.innerHTML : '';
+
+  /* Live count of answers, shown once there are enough to mean something. */
+  var aqLive = document.getElementById('aq-live');
+  if (aqLive && ENDPOINT.indexOf('http') === 0 && window.fetch) {
+    fetch(ENDPOINT + '?stats=aq', { redirect: 'follow' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d && d.ok && d.count >= 20 && d.median !== null) {
+          document.getElementById('aq-live-count').textContent = d.count.toLocaleString();
+          document.getElementById('aq-live-median').textContent = d.median;
+          aqLive.hidden = false;
+        }
+      })
+      .catch(function () {});
+  }
 
   function readoutFor(n) {
     if (n === 0) {
@@ -52,6 +68,7 @@
         aqX.href = 'https://x.com/intent/post?text=' + encodeURIComponent(text);
         aqShare.hidden = false;
       }
+      if (runIt) runIt.hidden = isNaN(n);
       aqReadout.classList.remove('is-updating');
     }, 120);
   }
@@ -182,6 +199,29 @@
       document.body.classList.add('signed-up');
       updateSticky();
     });
+  }
+
+  /* ---------- Top bar background after scroll ---------- */
+  var top = document.querySelector('.top');
+  if (top) {
+    var onTop = function () { top.classList.toggle('is-scrolled', window.scrollY > 24); };
+    window.addEventListener('scroll', onTop, { passive: true });
+    onTop();
+  }
+
+  /* ---------- Draw the line when it comes into view ---------- */
+  var lineFigure = document.querySelector('.line-figure');
+  if (lineFigure) {
+    if ('IntersectionObserver' in window) {
+      var lio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { lineFigure.classList.add('is-drawn'); lio.disconnect(); }
+        });
+      }, { threshold: 0.35 });
+      lio.observe(lineFigure);
+    } else {
+      lineFigure.classList.add('is-drawn');
+    }
   }
 
   /* ---------- Reading progress (prologue) ---------- */

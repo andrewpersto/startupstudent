@@ -23,7 +23,33 @@ var SHEET_NAME = 'Signups';
 var HEADERS = ['Timestamp', 'Email', 'AQ (days)', 'Source', 'Page', 'Referrer', 'User agent', 'Status'];
 
 function doGet(e) {
+  var p = (e && e.parameter) || {};
+  if (p.stats === 'aq') return json_(aqStats_());
   return json_({ ok: true, service: 'the-student-founder-signups' });
+}
+
+/** Count and median of Agency Quotient answers, for the live number on the site. */
+function aqStats_() {
+  var cache = CacheService.getScriptCache();
+  var hit = cache.get('aq_stats');
+  if (hit) return JSON.parse(hit);
+  var sheet = getSheet_();
+  var last = sheet.getLastRow();
+  var values = last < 2 ? [] : sheet.getRange(2, 3, last - 1, 1).getValues();
+  var nums = [];
+  for (var i = 0; i < values.length; i++) {
+    var n = Number(values[i][0]);
+    if (values[i][0] !== '' && !isNaN(n)) nums.push(n);
+  }
+  nums.sort(function (a, b) { return a - b; });
+  var median = null;
+  if (nums.length) {
+    var mid = Math.floor(nums.length / 2);
+    median = nums.length % 2 ? nums[mid] : Math.round((nums[mid - 1] + nums[mid]) / 2);
+  }
+  var out = { ok: true, count: nums.length, median: median };
+  cache.put('aq_stats', JSON.stringify(out), 300);
+  return out;
 }
 
 function doPost(e) {
@@ -117,6 +143,7 @@ function welcomeReader_(email, aq) {
     '<p style="font-size:22px;font-weight:800;margin:24px 0 8px">Here is the prologue.</p>' +
     '<p>It is called <a href="' + SITE + '/prologue.html" style="color:#E4572E;font-weight:700">Blood in the Shoes</a>, and it is the two-mile walk across Chicago with $42 in the bank. It takes about twelve minutes.</p>' +
     aqLine +
+    '<p>One more thing you can use tonight: the <a href="' + SITE + '/founders-page.html" style="color:#E4572E;font-weight:700">Founder’s Page</a>, the ten lines the book asks you to fill in, ready to print.</p>' +
     '<p>You will hear from me once more, when the book is out. That is all this list is for.</p>' +
     '<p>Andrew</p>' +
     '<p style="color:#77726A;font-size:13px;margin-top:32px">You are getting this because you asked for the prologue at thestudentfounder.com. If that was not you, reply to this email and I will take you off.</p>' +

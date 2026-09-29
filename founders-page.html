@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Founder's Page | The Student Founder</title>
+<meta name="description" content="The Founder's Page from The Student Founder, ready to print: ten lines about your problem, one per chapter.">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Archivo+Black&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.sheet-wrap { padding: 5.5rem 0 4rem; }
+.sheet-tools { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: baseline; margin-bottom: 2rem; }
+.sheet-tools button {
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--cream);
+  font-weight: 800;
+  padding: 0.8rem 1.25rem;
+  cursor: pointer;
+}
+.sheet-tools button:hover { background: var(--orange); border-color: var(--orange); }
+.sheet-tools p { color: var(--ink-soft); max-width: 48ch; }
+.sheet { max-width: 8.5in; margin: 0 auto; }
+.sheet .founders-page { box-shadow: none; }
+.sheet .founders-page li { padding: 1.25rem 0 1.15rem; line-height: 2; }
+.sheet .founders-page .blank { min-width: 8ch; }
+.sheet .founders-page .blank.w { min-width: 14ch; }
+.sheet .founders-page .blank.xw { min-width: 22ch; }
+.sheet .from { margin-top: 1.5rem; font-size: 0.85rem; color: var(--ink-mute); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+@media print {
+  @page { size: letter; margin: 0.6in; }
+  body { background: #fff; }
+  .top, .sheet-tools, .footer, .sticky-cta { display: none !important; }
+  .sheet-wrap { padding: 0; }
+  .sheet .founders-page { border: 0; padding: 0; }
+  .sheet .founders-page li { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+<div class="wrap">
+<a class="wordmark" href="index.html">The Student <span>Founder</span></a>
+<a class="top-link" href="index.html#signup">Get the prologue free</a>
+</div>
+</header>
+
+<main class="wrap sheet-wrap">
+<div class="sheet-tools">
+<button type="button" onclick="window.print()">Print this page</button>
+<p>Letter size, one sheet. The book says to copy the ten prompts onto one page tonight and keep it where you'll see it. This is that page.</p>
+</div>
+
+<div class="sheet">
+<div class="founders-page">
+<h3>The Founder's Page</h3>
+<ol>
+<li><b>One. The Odds.</b> My stop line: <span class="blank w"></span> dollars and <span class="blank"></span> months. My Agency Quotient today: <span class="blank"></span> days.</li>
+<li><b>Two. The Trap and the Trade.</b> A goal I'm chasing this semester that I copied: <span class="blank xw"></span>. Copied from: <span class="blank w"></span>.</li>
+<li><b>Three. The Idea.</b> The problem still standing, in the words of the person who has it: "<span class="blank xw"></span>"</li>
+<li><b>Four. The Time.</b> The ninety minutes that are genuinely mine: <span class="blank w"></span>. The hardest problem I'll spend them on: <span class="blank w"></span>.</li>
+<li><b>Five. The Partner.</b> <span class="blank w"></span>. Four-year vesting, one-year cliff, split <span class="blank"></span> / <span class="blank"></span>, in writing on <span class="blank w"></span>.</li>
+<li><b>Six. The Customers.</b> Micro-niche: setting <span class="blank"></span>, size <span class="blank"></span>, trigger <span class="blank"></span>, vocabulary <span class="blank"></span>. Signal: <span class="blank"></span> of <span class="blank"></span> used the same words, <span class="blank"></span> commitment at the money rung, source repeatable, yes or no <span class="blank"></span>.</li>
+<li><b>Seven. The Build.</b> Input <span class="blank"></span>. Transformation <span class="blank"></span>. Output <span class="blank"></span>. Edge cases <span class="blank"></span>.</li>
+<li><b>Eight. The Close.</b> I build if <span class="blank w"></span>. I pivot once if <span class="blank w"></span>, keeping <span class="blank"></span>. I kill it if <span class="blank w"></span>. Written before I have a reason to argue with it.</li>
+<li><b>Nine. The Noticing.</b> My one place: <span class="blank w"></span>. Day 30: a dozen posts up. Day 90: one real-world result out of forty posts.</li>
+<li><b>Ten. The Money.</b> Payback period: <span class="blank"></span> months. Default alive, asked on the <span class="blank"></span> of every month: <span class="blank"></span>.</li>
+</ol>
+<p class="foot">When the page is full, turn to Day 1 of the sprint at the back of the book.</p>
+<div class="from"><span>From The Student Founder, by Andrew Ashur</span><span>thestudentfounder.com</span></div>
+</div>
+</div>
+</main>
+
+<footer class="footer">
+<div class="wrap">
+<span>&copy; 2026 The Student Founder &middot; Andrew Ashur</span>
+<nav aria-label="Links">
+<a href="index.html">Home</a>
+<a href="prologue.html">Prologue</a>
+</nav>
+</div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
