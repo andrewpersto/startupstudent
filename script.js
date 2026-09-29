@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var ENDPOINT = 'REPLACE_WITH_APPS_SCRIPT_WEB_APP_URL';
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbx9RlRL4sLZrTAoRuuaAoxf5gRypanyWEJR69WZG55gNbZynzUC2U4AdFn5pOiJ8-tVqw/exec';
   var SITE = 'https://www.thestudentfounder.com';
 
   /* ---------- Agency Quotient ---------- */
@@ -21,10 +21,10 @@
 
   function readoutFor(n) {
     if (n === 0) {
-      return '<strong>Same day.</strong> That is the gap the whole book is trying to make your default. The question is whether the next idea gets the same treatment.';
+      return '<strong>Same day.</strong> That is the habit this whole book is trying to build, so the only question left is whether the next idea gets the same treatment.';
     }
     if (n <= 7) {
-      return '<strong>Under a week.</strong> The idea got out of your head while it was still warm. The book’s job is to make that the rule, not the exception.';
+      return '<strong>Under a week.</strong> The idea got out of your head while it was still warm. Most of the book is about doing that on purpose, every time.';
     }
     if (n <= 30) {
       return '<strong>About a month.</strong> Long enough for the idea to cool and the doubts to move in. The 30-day sprint at the back of the book exists for exactly this number.';
@@ -32,7 +32,7 @@
     if (n <= 365) {
       return '<strong>Most of a year.</strong> That is not a time problem. It is a priority problem, and it is the one variable in the book that is entirely in your hands.';
     }
-    return '<strong>Over a year.</strong> The idea is still there, and so is the gap. Nothing about your bank account, your major, or your connections set this number. That is the good news.';
+    return '<strong>Over a year,</strong> and the idea is probably still sitting there. Nothing about your bank account, your major, or your connections set that number, which is the good news, because it means you can move it.';
   }
 
   function updateAQ() {
@@ -116,6 +116,7 @@
         form.classList.add('is-done');
         setStatus(form, '', null);
         try { window.localStorage.setItem('tsf_signed_up', '1'); } catch (e) {}
+        document.dispatchEvent(new Event('tsf:signed-up'));
       } else {
         setStatus(form, errMsg || 'Something broke on our end. Try again in a minute, or email andrew@persto.io.', 'error');
       }
@@ -145,12 +146,43 @@
       .catch(function () { finish(false); });
   }
 
-  Array.prototype.forEach.call(document.querySelectorAll('form.signup'), function (form) {
+  var forms = document.querySelectorAll('form.signup');
+  Array.prototype.forEach.call(forms, function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       submitForm(form);
     });
   });
+
+  var alreadySignedUp = false;
+  try { alreadySignedUp = window.localStorage.getItem('tsf_signed_up') === '1'; } catch (e) {}
+
+  /* ---------- Sticky CTA on small screens ---------- */
+  var sticky = document.querySelector('.sticky-cta');
+  if (sticky && !alreadySignedUp && forms.length) {
+    var formsInView = 0;
+    var pastHero = false;
+    var updateSticky = function () {
+      var show = pastHero && formsInView === 0 && !document.body.classList.contains('signed-up');
+      sticky.hidden = !show;
+      sticky.classList.toggle('is-visible', show);
+    };
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.target === forms[0]) { pastHero = !en.isIntersecting && en.boundingClientRect.top < 0; }
+          formsInView += en.isIntersecting ? 1 : -1;
+          if (formsInView < 0) formsInView = 0;
+        });
+        updateSticky();
+      }, { threshold: 0.2 });
+      Array.prototype.forEach.call(forms, function (f) { io.observe(f); });
+    }
+    document.addEventListener('tsf:signed-up', function () {
+      document.body.classList.add('signed-up');
+      updateSticky();
+    });
+  }
 
   /* ---------- Reading progress (prologue) ---------- */
   var progress = document.querySelector('.progress');

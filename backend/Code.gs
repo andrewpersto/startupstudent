@@ -48,7 +48,7 @@ function doPost(e) {
 
     if (status === 'new') {
       notifyOwner_(email, aq, source, page, referrer);
-      if (source === 'prologue') {
+      if (source === 'prologue' || source === 'prologue-mid') {
         welcomeAfterPrologue_(email);
       } else {
         welcomeReader_(email, aq);
@@ -110,23 +110,22 @@ function notifyOwner_(email, aq, source, page, referrer) {
 
 function welcomeReader_(email, aq) {
   var aqLine = aq
-    ? '<p>You wrote down <strong>' + escapeHtml_(aq) + ' days</strong>. Keep the number. The book asks you to take it again on Day 30 of the sprint, and the direction matters more than the level.</p>'
+    ? '<p>You wrote down <strong>' + escapeHtml_(aq) + ' days</strong> for your Agency Quotient. Keep it somewhere you will see it. The book asks for the number again on Day 30 of the sprint, and the direction matters more than the level.</p>'
     : '';
   var html =
     '<div style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#1A1A1A;line-height:1.55;font-size:16px">' +
-    '<p style="font-size:22px;font-weight:800;margin:24px 0 8px">The prologue is yours.</p>' +
-    '<p>Read it here: <a href="' + SITE + '/prologue.html" style="color:#E4572E;font-weight:700">Blood in the Shoes</a>.</p>' +
-    '<p>It is the two-mile walk across Chicago, the twenty-eighth floor, and the $42. It is about a twelve-minute read.</p>' +
+    '<p style="font-size:22px;font-weight:800;margin:24px 0 8px">Here is the prologue.</p>' +
+    '<p>It is called <a href="' + SITE + '/prologue.html" style="color:#E4572E;font-weight:700">Blood in the Shoes</a>, and it is the two-mile walk across Chicago with $42 in the bank. It takes about twelve minutes.</p>' +
     aqLine +
-    '<p>One more email will come from me, once, when the book is out. That is the whole list.</p>' +
+    '<p>You will hear from me once more, when the book is out. That is all this list is for.</p>' +
     '<p>Andrew</p>' +
-    '<p style="color:#77726A;font-size:13px;margin-top:32px">You are getting this because you asked for the prologue at thestudentfounder.com. Reply to this email if you did not, and I will remove you.</p>' +
+    '<p style="color:#77726A;font-size:13px;margin-top:32px">You are getting this because you asked for the prologue at thestudentfounder.com. If that was not you, reply to this email and I will take you off.</p>' +
     '</div>';
   MailApp.sendEmail({
     to: email,
     subject: 'Your prologue: Blood in the Shoes',
     htmlBody: html,
-    body: 'Read the prologue here: ' + SITE + '/prologue.html\n\nOne more email will come, once, when the book is out.\n\nAndrew',
+    body: 'Here is the prologue: ' + SITE + '/prologue.html\n\nYou will hear from me once more, when the book is out.\n\nAndrew',
     name: FROM_NAME,
     replyTo: 'andrew@persto.io'
   });
@@ -136,17 +135,16 @@ function welcomeAfterPrologue_(email) {
   var html =
     '<div style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#1A1A1A;line-height:1.55;font-size:16px">' +
     '<p style="font-size:22px;font-weight:800;margin:24px 0 8px">You are on the list.</p>' +
-    '<p>You read the prologue, so you know how the elevator ride ends. The rest of the book is the manual for what comes after you step off.</p>' +
-    '<p>One email will come from me, once, when the book is out. That is the whole list.</p>' +
-    '<p>If you want the prologue again, it lives here: <a href="' + SITE + '/prologue.html" style="color:#E4572E;font-weight:700">Blood in the Shoes</a>.</p>' +
+    '<p>You read the prologue, so you already know how the elevator ride ends. The rest of the book is the manual for what comes after you step off, and I will write once more when it is out.</p>' +
+    '<p>If you want the prologue again, it is here: <a href="' + SITE + '/prologue.html" style="color:#E4572E;font-weight:700">Blood in the Shoes</a>.</p>' +
     '<p>Andrew</p>' +
-    '<p style="color:#77726A;font-size:13px;margin-top:32px">You are getting this because you signed up at thestudentfounder.com. Reply to this email if you did not, and I will remove you.</p>' +
+    '<p style="color:#77726A;font-size:13px;margin-top:32px">You are getting this because you signed up at thestudentfounder.com. If that was not you, reply to this email and I will take you off.</p>' +
     '</div>';
   MailApp.sendEmail({
     to: email,
     subject: 'You are on the list',
     htmlBody: html,
-    body: 'You are on the list. One email will come, once, when the book is out.\n\nThe prologue lives here: ' + SITE + '/prologue.html\n\nAndrew',
+    body: 'You are on the list. I will write once more, when the book is out.\n\nThe prologue is here: ' + SITE + '/prologue.html\n\nAndrew',
     name: FROM_NAME,
     replyTo: 'andrew@persto.io'
   });
