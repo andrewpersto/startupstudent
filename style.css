@@ -183,7 +183,6 @@ button, input { font: inherit; color: inherit; }
   color: var(--ink-mute);
   max-width: 34ch;
 }
-.cover.enter { animation-delay: 0.35s; }
 
 /* ---------- Signup form ---------- */
 .signup { max-width: 34rem; }
@@ -272,10 +271,8 @@ button, input { font: inherit; color: inherit; }
 }
 .on-ink .prose .big { color: var(--on-ink-soft); }
 .kicker {
-  font-family: var(--display);
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 1.05rem;
   color: var(--orange-deep);
   margin-bottom: 1rem;
 }
@@ -340,11 +337,15 @@ button, input { font: inherit; color: inherit; }
 .line-figure.is-drawn .flat { animation: draw 0.9s var(--ease) forwards; }
 .line-figure.is-drawn .rise { animation: draw 1.1s var(--ease) 0.7s forwards; }
 .line-figure text {
-  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-size: 15px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 16px;
   fill: var(--ink);
 }
 .line-figure text.o { fill: var(--orange-deep); }
+.line-figure text { opacity: 0; transition: opacity 0.5s var(--ease); }
+.line-figure.is-drawn text:not(.o) { opacity: 1; transition-delay: 0.6s; }
+.line-figure.is-drawn text.o { opacity: 1; transition-delay: 1.6s; }
 .outcomes {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -446,10 +447,9 @@ button, input { font: inherit; color: inherit; }
   padding: 1.25rem 1.5rem 1.4rem;
 }
 .run-it h3 {
-  font-family: var(--display);
-  font-size: 1rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
   color: var(--orange);
 }
 .run-it ol { margin: 0.75rem 0 0 1.2rem; color: var(--on-ink-soft); }
@@ -507,9 +507,9 @@ button, input { font: inherit; color: inherit; }
 }
 .founders-page h3 {
   font-family: var(--display);
-  font-size: 1.1rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
   padding-bottom: 0.75rem;
   border-bottom: 3px solid var(--ink);
 }
@@ -546,21 +546,6 @@ button, input { font: inherit; color: inherit; }
   object-fit: cover;
   filter: grayscale(1) contrast(1.05);
   mix-blend-mode: multiply;
-}
-.author-name {
-  font-family: var(--display);
-  font-size: 1rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  margin-top: 1rem;
-}
-.author-name::before {
-  content: "";
-  display: block;
-  width: 3rem;
-  height: 4px;
-  background: var(--orange);
-  margin-bottom: 0.9rem;
 }
 .creds {
   list-style: none;
@@ -704,19 +689,11 @@ button, input { font: inherit; color: inherit; }
 
 /* ---------- Motion ---------- */
 @keyframes draw { to { stroke-dashoffset: 0; } }
-@keyframes rise {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; }
-}
-.hero .enter { animation: rise 0.8s var(--ease) both; }
-.hero .tagline.enter { animation-delay: 0.1s; }
-.hero .lede.enter { animation-delay: 0.2s; }
-.hero .hero-aside.enter { animation-delay: 0.3s; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero .enter, .cover.enter { animation: none; }
   .line-figure .draw { stroke-dashoffset: 0; animation: none !important; }
+  .line-figure text { opacity: 1; transition: none; }
   .aq-readout { transition: none; }
 }
 
@@ -769,5 +746,5 @@ button, input { font: inherit; color: inherit; }
   .creds { grid-template-columns: minmax(0, 1fr); }
   .creds li + li { border-left: 0; padding-left: 0; }
   .top-link { display: none; }
-  .line-figure text { font-size: 12px; }
+  .line-figure text { font-size: 46px; }
 }
