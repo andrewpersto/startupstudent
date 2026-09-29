@@ -92,7 +92,7 @@ button, input { font: inherit; color: inherit; }
   text-transform: uppercase;
   text-decoration: none;
 }
-.wordmark span { color: var(--orange); }
+.wordmark span { color: var(--orange-deep); }
 .top-link {
   font-weight: 700;
   font-size: 0.95rem;
