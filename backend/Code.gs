@@ -181,7 +181,7 @@ function welcomeReader_(email, aq) {
     '<p>It is called <a href="' + SITE + '/prologue.html" style="color:#E4572E;font-weight:700">Blood in the Shoes</a>, and it is the two-mile walk across Chicago with $42 in the bank. It takes about twelve minutes.</p>' +
     aqLine +
     '<p>One more thing you can use tonight: the <a href="' + SITE + '/founders-page.html" style="color:#E4572E;font-weight:700">Founder’s Page</a>, the ten lines the book asks you to fill in, ready to print.</p>' +
-    '<p>You will hear from me once more, when the book is out. That is all this list is for.</p>' +
+    '<p>You will hear from me once more, in February 2027 when the book is out. That is all this list is for.</p>' +
     '<p>Andrew</p>' +
     '<p style="color:#77726A;font-size:13px;margin-top:32px">You are getting this because you asked for the prologue at thestudentfounder.com. If that was not you, reply to this email and I will take you off.</p>' +
     '</div>';
@@ -189,7 +189,7 @@ function welcomeReader_(email, aq) {
     to: email,
     subject: 'Your prologue: Blood in the Shoes',
     htmlBody: html,
-    body: 'Here is the prologue: ' + SITE + '/prologue.html\n\nYou will hear from me once more, when the book is out.\n\nAndrew',
+    body: 'Here is the prologue: ' + SITE + '/prologue.html\n\nYou will hear from me once more, in February 2027 when the book is out.\n\nAndrew',
     name: FROM_NAME,
     replyTo: 'andrew@persto.io'
   });
@@ -199,7 +199,7 @@ function welcomeAfterPrologue_(email) {
   var html =
     '<div style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#1A1A1A;line-height:1.55;font-size:16px">' +
     '<p style="font-size:22px;font-weight:800;margin:24px 0 8px">You are on the list.</p>' +
-    '<p>You read the prologue, so you already know how the elevator ride ends. The rest of the book is the manual for what comes after you step off, and I will write once more when it is out.</p>' +
+    '<p>You read the prologue, so you already know how the elevator ride ends. The rest of the book is the manual for what comes after you step off, and I will write once more when it is out in February 2027.</p>' +
     '<p>If you want the prologue again, it is here: <a href="' + SITE + '/prologue.html" style="color:#E4572E;font-weight:700">Blood in the Shoes</a>.</p>' +
     '<p>Andrew</p>' +
     '<p style="color:#77726A;font-size:13px;margin-top:32px">You are getting this because you signed up at thestudentfounder.com. If that was not you, reply to this email and I will take you off.</p>' +
@@ -208,7 +208,7 @@ function welcomeAfterPrologue_(email) {
     to: email,
     subject: 'You are on the list',
     htmlBody: html,
-    body: 'You are on the list. I will write once more, when the book is out.\n\nThe prologue is here: ' + SITE + '/prologue.html\n\nAndrew',
+    body: 'You are on the list. I will write once more, in February 2027 when the book is out.\n\nThe prologue is here: ' + SITE + '/prologue.html\n\nAndrew',
     name: FROM_NAME,
     replyTo: 'andrew@persto.io'
   });
