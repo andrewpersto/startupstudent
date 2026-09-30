@@ -748,3 +748,41 @@ button, input { font: inherit; color: inherit; }
   .top-link { display: none; }
   .line-figure text { font-size: 46px; }
 }
+
+/* ---------- Optional note after signup ---------- */
+.note { margin-top: 1.25rem; }
+.note label { display: block; font-weight: 700; line-height: 1.35; margin-bottom: 0.6rem; max-width: 44ch; }
+.note textarea {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 5.5rem;
+}
+.note textarea:focus { outline: none; border-color: var(--orange); }
+.note-row { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; align-items: center; margin-top: 0.6rem; }
+.note button {
+  border: 0;
+  background: var(--ink);
+  color: var(--cream);
+  font-weight: 800;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+}
+.note button:hover { background: var(--orange); }
+.note button:disabled { opacity: 0.7; cursor: wait; }
+.note-hint { font-size: 0.85rem; color: var(--ink-mute); }
+.note-status { margin-top: 0.5rem; font-weight: 600; color: var(--orange-deep); }
+.note-status:empty { display: none; }
+.note-sent { margin-top: 1rem; }
+.on-ink .note textarea { border-color: var(--cream); background: transparent; color: var(--cream); }
+.on-ink .note textarea::placeholder { color: var(--on-ink-soft); }
+.on-ink .note button { background: var(--orange); color: var(--ink); }
+.on-ink .note button:hover { background: var(--cream); }
+.on-ink .note-hint { color: var(--on-ink-soft); }
+.on-ink .note-status { color: #FFB59E; }

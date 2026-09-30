@@ -20,7 +20,9 @@ var NOTIFY_TO = 'andrew@persto.io, andrewashur@gmail.com';
 var FROM_NAME = 'The Student Founder';
 var SITE = 'https://www.thestudentfounder.com';
 var SHEET_NAME = 'Signups';
-var HEADERS = ['Timestamp', 'Email', 'AQ (days)', 'Source', 'Page', 'Referrer', 'User agent', 'Status'];
+var HEADERS = ['Timestamp', 'Email', 'AQ (days)', 'Source', 'Page', 'Referrer', 'User agent', 'Status', 'Note', 'ID'];
+var COL_NOTE = 9;
+var COL_ID = 10;
 
 function doGet(e) {
   var p = (e && e.parameter) || {};
@@ -58,6 +60,7 @@ function doPost(e) {
   try {
     var p = (e && e.parameter) || {};
     if (p.website) return json_({ ok: true }); // honeypot filled: pretend success, store nothing
+    if (p.action === 'note') return json_(saveNote_(p));
 
     var email = String(p.email || '').trim().toLowerCase();
     if (!isEmail_(email)) return json_({ ok: false, error: 'invalid_email' });
@@ -70,7 +73,8 @@ function doPost(e) {
 
     var sheet = getSheet_();
     var status = isDuplicate_(sheet, email) ? 'duplicate' : 'new';
-    sheet.appendRow([new Date(), email, aq, source, page, referrer, ua, status]);
+    var id = Utilities.getUuid();
+    sheet.appendRow([new Date(), email, aq, source, page, referrer, ua, status, '', id]);
 
     if (status === 'new') {
       notifyOwner_(email, aq, source, page, referrer);
@@ -80,7 +84,7 @@ function doPost(e) {
         welcomeReader_(email, aq);
       }
     }
-    return json_({ ok: true, status: status });
+    return json_({ ok: true, status: status, id: id });
   } catch (err) {
     return json_({ ok: false, error: String(err) });
   } finally {
@@ -95,6 +99,10 @@ function getSheet_() {
     sheet = ss.getSheets()[0];
     sheet.setName(SHEET_NAME);
   }
+  if (sheet.getLastRow() > 0 && sheet.getRange(1, HEADERS.length).getValue() !== HEADERS[HEADERS.length - 1]) {
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
+    sheet.setColumnWidth(COL_NOTE, 360);
+  }
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(HEADERS);
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
@@ -103,6 +111,35 @@ function getSheet_() {
     sheet.setColumnWidth(2, 260);
   }
   return sheet;
+}
+
+/** Attach an optional note to the signup row identified by the id returned at signup. */
+function saveNote_(p) {
+  var id = String(p.id || '').trim();
+  var note = String(p.note || '').trim().slice(0, 1000);
+  if (!/^[0-9a-f-]{36}$/i.test(id)) return { ok: false, error: 'invalid_id' };
+  if (!note) return { ok: false, error: 'empty_note' };
+  if (/^[=+\-@]/.test(note)) note = "'" + note; // keep Sheets from reading it as a formula
+  var sheet = getSheet_();
+  var last = sheet.getLastRow();
+  if (last < 2) return { ok: false, error: 'not_found' };
+  var ids = sheet.getRange(2, COL_ID, last - 1, 1).getValues();
+  for (var i = ids.length - 1; i >= 0; i--) {
+    if (ids[i][0] === id) {
+      var row = i + 2;
+      sheet.getRange(row, COL_NOTE).setValue(note);
+      var email = sheet.getRange(row, 2).getValue();
+      MailApp.sendEmail({
+        to: NOTIFY_TO,
+        subject: 'Note from ' + email,
+        body: email + ' added a note after signing up:\n\n' + note + '\n\nSheet: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl(),
+        name: FROM_NAME,
+        replyTo: email
+      });
+      return { ok: true };
+    }
+  }
+  return { ok: false, error: 'not_found' };
 }
 
 function isDuplicate_(sheet, email) {

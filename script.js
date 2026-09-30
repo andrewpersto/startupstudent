@@ -126,7 +126,7 @@
     button.textContent = 'Sending';
     setStatus(form, '', null);
 
-    var finish = function (ok, errMsg) {
+    var finish = function (ok, errMsg, signupId) {
       button.disabled = false;
       button.textContent = label;
       if (ok) {
@@ -134,6 +134,7 @@
         setStatus(form, '', null);
         try { window.localStorage.setItem('tsf_signed_up', '1'); } catch (e) {}
         document.dispatchEvent(new Event('tsf:signed-up'));
+        if (signupId) addNoteForm(form, signupId);
       } else {
         setStatus(form, errMsg || 'Something broke on our end. Try again in a minute, or email andrew@persto.io.', 'error');
       }
@@ -153,7 +154,7 @@
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (data && data.ok) {
-          finish(true);
+          finish(true, null, data.id);
         } else if (data && data.error === 'invalid_email') {
           finish(false, 'That email doesn’t look complete. Check it and try again.');
         } else {
@@ -161,6 +162,55 @@
         }
       })
       .catch(function () { finish(false); });
+  }
+
+  /* ---------- Optional note after signup ---------- */
+  var noteCount = 0;
+  function addNoteForm(form, signupId) {
+    var done = form.querySelector('.done');
+    if (!done || done.querySelector('.note')) return;
+    noteCount += 1;
+    var nid = 'note-' + noteCount;
+    var wrap = document.createElement('div');
+    wrap.className = 'note';
+    wrap.innerHTML =
+      '<label for="' + nid + '">Anything you want to tell me? What you\u2019re building, or what\u2019s stopping you.</label>' +
+      '<textarea id="' + nid + '" rows="3" maxlength="1000" placeholder="Optional"></textarea>' +
+      '<div class="note-row"><button type="button">Send note</button><span class="note-hint">It comes straight to my inbox.</span></div>' +
+      '<p class="note-status" role="status" aria-live="polite"></p>';
+    done.appendChild(wrap);
+    var ta = wrap.querySelector('textarea');
+    var btn = wrap.querySelector('button');
+    var status = wrap.querySelector('.note-status');
+    btn.addEventListener('click', function () {
+      var note = ta.value.trim();
+      if (!note) { status.textContent = 'Write something first, or skip it. It\u2019s optional.'; ta.focus(); return; }
+      btn.disabled = true;
+      btn.textContent = 'Sending';
+      var body = new URLSearchParams();
+      body.set('action', 'note');
+      body.set('id', signupId);
+      body.set('note', note);
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+        redirect: 'follow'
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.ok) {
+            wrap.innerHTML = '<p class="note-sent"><strong>Got it.</strong> Thanks for telling me.</p>';
+          } else {
+            throw new Error('not ok');
+          }
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = 'Send note';
+          status.textContent = 'That didn\u2019t send. Try again in a minute.';
+        });
+    });
   }
 
   var forms = document.querySelectorAll('form.signup');
