@@ -191,7 +191,7 @@ function welcomeReader_(email, aq) {
     htmlBody: html,
     body: 'Here is the prologue: ' + SITE + '/prologue.html\n\nYou will hear from me once more, in February 2027 when the book is out.\n\nAndrew',
     name: FROM_NAME,
-    replyTo: 'andrew@persto.io'
+    replyTo: 'andrewashur@gmail.com'
   });
 }
 
@@ -210,7 +210,7 @@ function welcomeAfterPrologue_(email) {
     htmlBody: html,
     body: 'You are on the list. I will write once more, in February 2027 when the book is out.\n\nThe prologue is here: ' + SITE + '/prologue.html\n\nAndrew',
     name: FROM_NAME,
-    replyTo: 'andrew@persto.io'
+    replyTo: 'andrewashur@gmail.com'
   });
 }
 

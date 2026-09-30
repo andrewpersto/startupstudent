@@ -141,7 +141,7 @@
           if (f !== form) markListed(f);
         });
       } else {
-        setStatus(form, errMsg || 'Something broke on our end. Try again in a minute, or email andrew@persto.io.', 'error');
+        setStatus(form, errMsg || 'Something broke on our end. Try again in a minute, or email andrewashur@gmail.com.', 'error');
       }
     };
 
