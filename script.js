@@ -10,6 +10,12 @@
   // Set this to the retail pre-order link when it exists. Empty means no pre-order button.
   var PREORDER_URL = '';
 
+  /* Google Analytics events. No-op when gtag is absent or blocked. */
+  function track(name, params) {
+    if (typeof window.gtag !== 'function') return;
+    try { window.gtag('event', name, params || {}); } catch (e) {}
+  }
+
   /* ---------- Agency Quotient ---------- */
   var aqInput = document.getElementById('aq-days');
   var aqReadout = document.getElementById('aq-readout');
@@ -19,6 +25,7 @@
   var aqX = document.getElementById('aq-x');
   var runIt = document.getElementById('run-it');
   var aqValue = '';
+  var aqTracked = false;
 
   var DEFAULT_READOUT = aqReadout ? aqReadout.innerHTML : '';
 
@@ -69,6 +76,7 @@
         var text = 'My Agency Quotient: ' + aqValue + ' day' + (n === 1 ? '' : 's') + ' between the idea and the first action. What’s yours? ' + SITE + '/#aq';
         aqX.href = 'https://x.com/intent/post?text=' + encodeURIComponent(text);
         aqShare.hidden = false;
+        if (!aqTracked) { aqTracked = true; track('aq_answered', { aq_days: n }); }
       }
       if (runIt) runIt.hidden = isNaN(n);
       aqReadout.classList.remove('is-updating');
@@ -136,6 +144,7 @@
         setStatus(form, '', null);
         try { window.localStorage.setItem('tsf_signed_up', '1'); } catch (e) {}
         document.dispatchEvent(new Event('tsf:signed-up'));
+        track('sign_up', { method: 'email', form_source: form.getAttribute('data-source') || '', aq_days: aqValue || undefined });
         if (signupId) addNoteForm(form, signupId);
         Array.prototype.forEach.call(document.querySelectorAll('form.signup'), function (f) {
           if (f !== form) markListed(f);
@@ -206,6 +215,7 @@
         .then(function (d) {
           if (d && d.ok) {
             wrap.innerHTML = '<p class="note-sent"><strong>Got it.</strong> Thanks for telling me.</p>';
+            track('note_sent', { form_source: form.getAttribute('data-source') || '' });
           } else {
             throw new Error('not ok');
           }
