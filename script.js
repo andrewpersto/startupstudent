@@ -7,6 +7,8 @@
 
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbx9RlRL4sLZrTAoRuuaAoxf5gRypanyWEJR69WZG55gNbZynzUC2U4AdFn5pOiJ8-tVqw/exec';
   var SITE = 'https://www.thestudentfounder.com';
+  // Set this to the retail pre-order link when it exists. Empty means no pre-order button.
+  var PREORDER_URL = '';
 
   /* ---------- Agency Quotient ---------- */
   var aqInput = document.getElementById('aq-days');
@@ -135,6 +137,9 @@
         try { window.localStorage.setItem('tsf_signed_up', '1'); } catch (e) {}
         document.dispatchEvent(new Event('tsf:signed-up'));
         if (signupId) addNoteForm(form, signupId);
+        Array.prototype.forEach.call(document.querySelectorAll('form.signup'), function (f) {
+          if (f !== form) markListed(f);
+        });
       } else {
         setStatus(form, errMsg || 'Something broke on our end. Try again in a minute, or email andrew@persto.io.', 'error');
       }
@@ -223,6 +228,29 @@
 
   var alreadySignedUp = false;
   try { alreadySignedUp = window.localStorage.getItem('tsf_signed_up') === '1'; } catch (e) {}
+
+  /* People already on the list see a confirmation instead of another form. */
+  function markListed(form) {
+    if (form.classList.contains('is-done')) return;
+    form.classList.add('is-done', 'is-returning');
+    var done = form.querySelector('.done');
+    if (done) {
+      done.innerHTML = '<strong>You\u2019re on the list.</strong> The book is out February 2027, and you\u2019ll hear the day it\u2019s available.';
+    }
+  }
+  if (alreadySignedUp) Array.prototype.forEach.call(forms, markListed);
+
+  /* Pre-order button, dormant until PREORDER_URL is set. */
+  if (PREORDER_URL) {
+    var aside = document.querySelector('.hero-aside');
+    if (aside) {
+      var btn = document.createElement('a');
+      btn.className = 'preorder';
+      btn.href = PREORDER_URL;
+      btn.textContent = 'Pre-order the book';
+      aside.insertBefore(btn, aside.firstChild);
+    }
+  }
 
   /* ---------- Sticky CTA on small screens ---------- */
   var sticky = document.querySelector('.sticky-cta');

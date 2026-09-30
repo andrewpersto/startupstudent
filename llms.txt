@@ -9,6 +9,7 @@ Status: manuscript complete, advance reader's copy exists, publication February 
 ## Pages
 
 - [Home](https://www.thestudentfounder.com/): the book, the Agency Quotient question, the Founder's Page, author bio, FAQ, and launch-list signup.
+- [Press kit](https://www.thestudentfounder.com/press.html): book facts, bios, images, lines from the book, interview topics, and contact.
 - [Prologue: Blood in the Shoes](https://www.thestudentfounder.com/prologue.html): the full prologue, free. The two-mile walk across Chicago with $42 in the company account and the investor on the twenty-eighth floor who said yes.
 
 ## Contents of the book
@@ -23,4 +24,4 @@ Status: manuscript complete, advance reader's copy exists, publication February 
 
 ## Author
 
-Andrew Ashur is the founder and CEO of Lucid Bots, the world's largest provider of drones and robots for exterior cleaning, named by Inc. 5000 the fastest-growing robotics manufacturer in the United States (2025). He started it in college with a $12 soldering iron. Forbes 30 Under 30 (2020). Y Combinator S19. He served as Davidson College's Innovator-in-Residence, working with hundreds of student entrepreneurs. Personal site: https://www.andrewashur.com
+Andrew Ashur is the founder and CEO of Lucid Bots, which builds robots that clean, paint, and coat the built world. In 2025, Inc. 5000 named Lucid Bots the fastest-growing robotics manufacturer in the United States. He started it in college with a $12 soldering iron. Forbes 30 Under 30 (2020). Y Combinator S19. He served as Davidson College's Innovator-in-Residence, working with hundreds of student entrepreneurs. Personal site: https://www.andrewashur.com
