@@ -840,7 +840,7 @@ button, input { font: inherit; color: inherit; }
   gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
 }
-.press-cover img { width: 100%; max-width: 320px; box-shadow: 0 30px 50px -28px rgba(26, 26, 26, 0.45); }
+.press-cover img { width: 100%; max-width: 320px; height: auto; box-shadow: 0 30px 50px -28px rgba(26, 26, 26, 0.45); }
 .facts { margin-top: 1.5rem; border-top: 2px solid var(--ink); }
 .facts > div { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--rule); }
 .facts dt { font-weight: 800; }
