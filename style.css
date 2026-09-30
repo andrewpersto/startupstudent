@@ -804,3 +804,24 @@ button, input { font: inherit; color: inherit; }
   letter-spacing: -0.01em;
   max-width: 22ch;
 }
+
+/* The graveyard: the book's honesty about losses */
+.graveyard {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: 1.5rem clamp(2rem, 5vw, 5rem);
+  padding: clamp(1.75rem, 4vw, 3rem);
+  background: var(--ink);
+  color: var(--on-ink);
+}
+.graveyard h3 {
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.graveyard .gy-body { max-width: 58ch; color: var(--on-ink-soft); }
+.graveyard .gy-body p + p { margin-top: 1rem; }
+.graveyard .gy-body p:first-child { color: var(--cream); font-size: 1.15rem; }
+@media (max-width: 900px) { .graveyard { grid-template-columns: minmax(0, 1fr); } }
