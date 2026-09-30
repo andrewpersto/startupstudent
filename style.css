@@ -82,7 +82,7 @@ button, input { font: inherit; color: inherit; }
 .top .wrap {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: 1rem;
 }
 .wordmark {
@@ -94,13 +94,15 @@ button, input { font: inherit; color: inherit; }
 }
 .wordmark span { color: var(--orange-deep); }
 .top-link {
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.95rem;
   text-decoration: none;
-  border-bottom: 2px solid var(--orange);
-  padding-bottom: 1px;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 0.6rem 1.1rem;
+  transition: background 0.2s var(--ease);
 }
-.top-link:hover { color: var(--orange-deep); }
+.top-link:hover { background: var(--orange); color: var(--ink); }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -885,3 +887,32 @@ button, input { font: inherit; color: inherit; }
   text-decoration: none;
 }
 .preorder:hover { background: var(--ink); color: var(--cream); }
+
+/* ---------- Photo in the opening ---------- */
+.opening-photo { margin-top: 2rem; max-width: 300px; }
+.opening-photo img { width: 100%; height: auto; box-shadow: 0 24px 40px -24px rgba(26, 26, 26, 0.5); }
+.opening-photo figcaption { margin-top: 0.6rem; font-size: 0.85rem; color: var(--ink-mute); }
+@media (max-width: 900px) {
+  .opening-grid > div:first-child { display: contents; }
+  .opening-photo { order: 3; max-width: 240px; margin-top: 2rem; }
+}
+
+/* ---------- Timeline ---------- */
+.timeline {
+  list-style: none;
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  border-top: 2px solid var(--ink);
+}
+.timeline li {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  gap: 1rem 2rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.timeline .y { font-family: var(--display); font-size: 1.25rem; letter-spacing: -0.01em; }
+.timeline .t { color: var(--ink-soft); max-width: 62ch; }
+.timeline .next .y { color: var(--orange-deep); }
+.timeline .next .t { color: var(--ink); font-weight: 700; }
+@media (max-width: 600px) { .timeline li { grid-template-columns: 4.5rem minmax(0, 1fr); gap: 0.5rem 1rem; } }
