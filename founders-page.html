@@ -18,14 +18,15 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-TLPSE1QZZ8');</script>
 
 <style>
-.sheet-wrap { padding: 5.5rem 0 4rem; }
+.sheet-wrap { padding: 5.5rem var(--gutter) 4rem; }
 .sheet-tools { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: baseline; margin-bottom: 2rem; }
 .sheet-tools button {
   border: 2px solid var(--ink);
   background: var(--ink);
   color: var(--cream);
-  font-weight: 800;
+  font-weight: 700;
   padding: 0.8rem 1.25rem;
+  border-radius: 6px;
   cursor: pointer;
 }
 .sheet-tools button:hover { background: var(--orange); border-color: var(--orange); }
@@ -33,6 +34,7 @@
 .sheet { max-width: 8.5in; margin: 0 auto; }
 .sheet .founders-page { box-shadow: none; }
 .sheet .founders-page li { padding: 1.25rem 0 1.15rem; line-height: 2; }
+.sheet .founders-page li.zero { padding: 1.25rem 14px 1.15rem; }
 .sheet .founders-page .blank { min-width: 8ch; }
 .sheet .founders-page .blank.w { min-width: 14ch; }
 .sheet .founders-page .blank.xw { min-width: 22ch; }

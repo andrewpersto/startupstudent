@@ -46,16 +46,16 @@
 
   function readoutFor(n) {
     if (n === 0) {
-      return '<strong>Zero.</strong> The day you saw it was the day something existed. That is the bar the book holds, so the only question left is whether the next idea gets the same treatment.';
+      return '<strong>Zero.</strong> You acted the day you saw it. That\u2019s the bar I hold myself to. Now do the same with the next idea.';
     }
     if (n <= 7) {
       return '<strong>Under a week.</strong> My own first count was under seven, and I’d call that slow now. The bar I hold myself to today is the same day.';
     }
     if (n <= 30) {
-      return '<strong>Weeks.</strong> Long enough for the idea to cool and the doubts to move in. The 30-day sprint at the back of the book is built for exactly this number.';
+      return '<strong>Weeks.</strong> That\u2019s long enough to talk yourself out of it. I wrote the 30-day sprint at the back of the book for this number.';
     }
     if (n <= 365) {
-      return '<strong>Months.</strong> In the book’s laundry-room example, still describing the idea at Thanksgiving is a seventy, and it’s still going up. So is yours, until you act on it.';
+      return '<strong>Months.</strong> In the book, a student who has a laundry-room idea in September and is still describing it at Thanksgiving scores a seventy. That count keeps climbing until they act, and so does yours.';
     }
     return '<strong>Over a year.</strong> Nothing about your bank account, your major, or your connections set that number, which is the good news. It means you can move it, starting today.';
   }
@@ -275,6 +275,19 @@
     }
   });
 
+  /* Header and sticky buttons: jump to the email box and focus it. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[data-focus]') : null;
+    if (!a) return;
+    var target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    var form = target.closest('form');
+    if (form && form.classList.contains('is-done')) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    window.setTimeout(function () { try { target.focus({ preventScroll: true }); } catch (err) { target.focus(); } }, 350);
+  });
+
   /* ---------- Sticky CTA on small screens ---------- */
   var sticky = document.querySelector('.sticky-cta');
   if (sticky && !alreadySignedUp && forms.length) {
@@ -284,6 +297,7 @@
       var show = pastHero && formsInView === 0 && !document.body.classList.contains('signed-up');
       sticky.hidden = !show;
       sticky.classList.toggle('is-visible', show);
+      document.body.classList.toggle('sticky-on', show);
     };
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {
