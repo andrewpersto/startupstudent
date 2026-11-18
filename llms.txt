@@ -1,26 +1,25 @@
 # The Student Founder
 
-> The Student Founder: Why Your Student Years Are the Best Time to Build Something Real. A book by Andrew Ashur, founder and CEO of Lucid Bots. Tagline: "$42 in the bank. No permission slip." Core sentence: "As a student, trying is free. After graduation, it's the most expensive thing you'll ever buy."
+> The Student Founder: Why Your Student Years Are the Best Time to Build Something Real. A book by Andrew Ashur, founder and CEO of Lucid Bots. Cover line: "How to start a real business as a student." Cover tagline: "Trying is free. It won't stay that way." Brand tagline: "$42 in the bank. No permission slip."
 
-The book is a practical manual for high school students, college students, and recent graduates who want to build something real while trying still costs almost nothing. Its argument: what stands between a student and a first paying customer is not experience. Experience has a substitute, and the substitute is agency, which the book measures as the Agency Quotient, the number of days between having an idea nobody assigned you and taking one concrete action on it.
+The book is a practical manual for high school students, college students, and recent graduates who want to build something real while trying still costs almost nothing. Its argument: as a student, the downside of building something real is close to nothing and the upside is uncapped, and it won't stay that way. The book measures agency as the Agency Quotient: the time between "I should" and "I am," counted as the days between having an idea and doing the first thing about it that a stranger could react to. Smaller is better, and the best count is zero.
 
-Status: manuscript complete, advance reader's copy exists, publication February 2027. Readers can leave an email at https://www.thestudentfounder.com to be notified at launch.
+Status: manuscript complete, advance reader's copy exists, publication February 2027. Readers can read chapter one free and leave an email at https://www.thestudentfounder.com to be notified at launch.
 
 ## Pages
 
 - [Home](https://www.thestudentfounder.com/): the book, the Agency Quotient question, the Founder's Page, author bio, FAQ, and launch-list signup.
 - [Press kit](https://www.thestudentfounder.com/press.html): book facts, bios, images, lines from the book, interview topics, and contact.
-- [Prologue: Blood in the Shoes](https://www.thestudentfounder.com/prologue.html): the full prologue, free. The two-mile walk across Chicago with $42 in the company account and the investor on the twenty-eighth floor who said yes.
+- [Chapter one: Blood in the Shoes](https://www.thestudentfounder.com/prologue.html): the full first chapter, free, on the page or as a PDF (https://www.thestudentfounder.com/the-student-founder-chapter-one.pdf). The two-mile walk across Chicago with forty-two dollars in the company account and the CEO on the twenty-eighth floor who said yes.
 
 ## Contents of the book
 
-- The Odds: what happens to founders who lose, told by two of them by name.
-- Finding your idea: a real problem, not one that only sounds good. Compliments are not currency. Money is the truth.
-- Finding the time: you don't have a time problem, you have a priority problem.
-- Customers before product: an hour with a customer beats eight hours at a desk.
-- Building it: it doesn't need to be pretty, it needs to exist.
-- The 30-day sprint: the whole book compressed into thirty days of reps.
-- The Founder's Page: ten blank lines about the reader's own problem, filled in one per chapter.
+- Part I, The Asymmetric Degree: Blood in the Shoes (chapter one), The Odds, The Trap and the Trade.
+- Part II, The First Rep: How Do I Find an Idea?, How Do I Find the Time?, Who Do I Build With?
+- Part III, The Compounding Loop: How Do I Find Customers?, How Do I Build the Product?, How Do I Close Customers?, How Do I Get People to Notice?
+- Part IV, Pouring Fuel: How Do I Build a Team?, How Do I Fund It?
+- Conclusion: The Startup Is You. The 30-Day Execution Sprint. Appendix.
+- The Founder's Page: a one-page plan the reader fills in, line zero first, then one line per chapter.
 
 ## Author
 

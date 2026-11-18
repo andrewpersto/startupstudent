@@ -46,18 +46,18 @@
 
   function readoutFor(n) {
     if (n === 0) {
-      return '<strong>Same day.</strong> That is the habit this whole book is trying to build, so the only question left is whether the next idea gets the same treatment.';
+      return '<strong>Zero.</strong> The day you saw it was the day something existed. That is the bar the book holds, so the only question left is whether the next idea gets the same treatment.';
     }
     if (n <= 7) {
-      return '<strong>Under a week.</strong> The idea got out of your head while it was still warm. Most of the book is about doing that on purpose, every time.';
+      return '<strong>Under a week.</strong> My own first count was under seven, and I’d call that slow now. The bar I hold myself to today is the same day.';
     }
     if (n <= 30) {
-      return '<strong>About a month.</strong> Long enough for the idea to cool and the doubts to move in. The 30-day sprint at the back of the book exists for exactly this number.';
+      return '<strong>Weeks.</strong> Long enough for the idea to cool and the doubts to move in. The 30-day sprint at the back of the book is built for exactly this number.';
     }
     if (n <= 365) {
-      return '<strong>Most of a year.</strong> That is not a time problem. It is a priority problem, and it is the one variable in the book that is entirely in your hands.';
+      return '<strong>Months.</strong> In the book’s laundry-room example, still describing the idea at Thanksgiving is a seventy, and it’s still going up. So is yours, until you act on it.';
     }
-    return '<strong>Over a year,</strong> and the idea is probably still sitting there. Nothing about your bank account, your major, or your connections set that number, which is the good news, because it means you can move it.';
+    return '<strong>Over a year.</strong> Nothing about your bank account, your major, or your connections set that number, which is the good news. It means you can move it, starting today.';
   }
 
   function updateAQ() {
@@ -155,7 +155,7 @@
     };
 
     if (!ENDPOINT || ENDPOINT.indexOf('http') !== 0) {
-      finish(false, 'Signups aren’t connected yet. Read the prologue in the meantime.');
+      finish(false, 'Signups aren’t connected yet. Read chapter one in the meantime.');
       return;
     }
 
@@ -245,14 +245,16 @@
     form.classList.add('is-done', 'is-returning');
     var done = form.querySelector('.done');
     if (done) {
-      done.innerHTML = '<strong>You\u2019re on the list.</strong> The book is out February 2027, and you\u2019ll hear the day it\u2019s available.';
+      done.innerHTML = '<strong>You’re on the list.</strong><p>The book is out February 2027, and you’ll hear the day it’s available.</p>' +
+        '<div class="done-actions"><a class="btn" href="prologue.html" data-cta="done-read">Read chapter one <span class="arr" aria-hidden="true">&rarr;</span></a>' +
+        '<a class="btn ghost" href="the-student-founder-chapter-one.pdf" download data-pdf>Download the PDF</a></div>';
     }
   }
   if (alreadySignedUp) Array.prototype.forEach.call(forms, markListed);
 
   /* Pre-order button, dormant until PREORDER_URL is set. */
   if (PREORDER_URL) {
-    var aside = document.querySelector('.hero-aside');
+    var aside = document.querySelector('.offer');
     if (aside) {
       var btn = document.createElement('a');
       btn.className = 'preorder';
@@ -261,6 +263,17 @@
       aside.insertBefore(btn, aside.firstChild);
     }
   }
+
+  /* ---------- Click tracking: CTAs and the PDF ---------- */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[data-cta], a[data-pdf]') : null;
+    if (!a) return;
+    if (a.hasAttribute('data-pdf')) {
+      track('file_download', { file_name: 'the-student-founder-chapter-one.pdf', link_location: window.location.pathname });
+    } else {
+      track('cta_click', { cta: a.getAttribute('data-cta') });
+    }
+  });
 
   /* ---------- Sticky CTA on small screens ---------- */
   var sticky = document.querySelector('.sticky-cta');
