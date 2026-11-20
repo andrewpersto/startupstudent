@@ -57,7 +57,7 @@
     if (n <= 365) {
       return '<strong>Months.</strong> In the book, a student who has a laundry-room idea in September and is still describing it at Thanksgiving scores a seventy. That count keeps climbing until they act, and so does yours.';
     }
-    return '<strong>Over a year.</strong> Nothing about your bank account, your major, or your connections set that number, which is the good news. It means you can move it, starting today.';
+    return '<strong>Over a year.</strong> Your bank account and your connections didn\u2019t set that number, so you can change it. Start with the next idea.';
   }
 
   function updateAQ() {
