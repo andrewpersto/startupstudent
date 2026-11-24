@@ -245,23 +245,25 @@
     form.classList.add('is-done', 'is-returning');
     var done = form.querySelector('.done');
     if (done) {
-      done.innerHTML = '<strong>You’re on the list.</strong><p>The book is out February 2027, and you’ll hear the day it’s available.</p>' +
+      done.innerHTML = '<strong>You’re on the list.</strong><p>The book is out February 23, 2027. I’ll write when preorders open and on the day it’s out.</p>' +
         '<div class="done-actions"><a class="btn" href="prologue.html" data-cta="done-read">Read chapter one <span class="arr" aria-hidden="true">&rarr;</span></a>' +
         '<a class="btn ghost" href="the-student-founder-chapter-one.pdf" download data-pdf>Download the PDF</a></div>';
     }
   }
   if (alreadySignedUp) Array.prototype.forEach.call(forms, markListed);
 
-  /* Pre-order button, dormant until PREORDER_URL is set. */
+  /* Preorder: set PREORDER_URL at the top of this file to the Amazon link and every
+     preorder button on the site turns on. Until then the chapter-one form is the ask. */
   if (PREORDER_URL) {
-    var aside = document.querySelector('.offer');
-    if (aside) {
-      var btn = document.createElement('a');
-      btn.className = 'preorder';
-      btn.href = PREORDER_URL;
-      btn.textContent = 'Pre-order the book';
-      aside.insertBefore(btn, aside.firstChild);
-    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-when="live"]'), function (el) { el.hidden = false; });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-when="pre"]'), function (el) { el.hidden = true; });
+    Array.prototype.forEach.call(document.querySelectorAll('a[data-preorder-link]'), function (a) { a.href = PREORDER_URL; });
+    Array.prototype.forEach.call(document.querySelectorAll('.top-link, .sticky-cta'), function (a) {
+      a.href = PREORDER_URL; a.target = '_blank'; a.rel = 'noopener';
+      a.removeAttribute('data-focus');
+      a.setAttribute('data-cta', a.classList.contains('top-link') ? 'preorder-header' : 'preorder-sticky');
+      a.innerHTML = 'Preorder on Kindle <span aria-hidden="true">&rarr;</span>';
+    });
   }
 
   /* ---------- Click tracking: CTAs and the PDF ---------- */
@@ -290,7 +292,7 @@
 
   /* ---------- Sticky CTA on small screens ---------- */
   var sticky = document.querySelector('.sticky-cta');
-  if (sticky && !alreadySignedUp && forms.length) {
+  if (sticky && (PREORDER_URL || !alreadySignedUp) && forms.length) {
     var formsInView = 0;
     var pastHero = false;
     var updateSticky = function () {

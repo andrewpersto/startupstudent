@@ -182,7 +182,7 @@ function welcomeReader_(email, aq) {
     '<p>Rather read it offline? <a href="' + SITE + '/the-student-founder-chapter-one.pdf" style="color:#E4572E;font-weight:700">Download the PDF</a>.</p>' +
     aqLine +
     '<p>One more thing you can use tonight: the <a href="' + SITE + '/founders-page.html" style="color:#E4572E;font-weight:700">Founder’s Page</a>, the one-page plan the book asks you to fill in, ready to print. Write line zero tonight.</p>' +
-    '<p>You will hear from me once more, in February 2027 when the book is out. That is all this list is for.</p>' +
+    '<p>I will write when preorders open and again on February 23, 2027, the day the book is out. That is all this list is for.</p>' +
     '<p>Andrew</p>' +
     '<p style="color:#77726A;font-size:13px;margin-top:32px">You are getting this because you asked for chapter one at thestudentfounder.com. If that was not you, reply to this email and I will take you off.</p>' +
     '</div>';
@@ -190,7 +190,7 @@ function welcomeReader_(email, aq) {
     to: email,
     subject: 'Chapter one: Blood in the Shoes',
     htmlBody: html,
-    body: 'Here is chapter one: ' + SITE + '/prologue.html\n\nThe PDF: ' + SITE + '/the-student-founder-chapter-one.pdf\n\nYou will hear from me once more, in February 2027 when the book is out.\n\nAndrew',
+    body: 'Here is chapter one: ' + SITE + '/prologue.html\n\nThe PDF: ' + SITE + '/the-student-founder-chapter-one.pdf\n\nI will write when preorders open and again on February 23, 2027, the day the book is out.\n\nAndrew',
     name: FROM_NAME,
     replyTo: 'andrewashur@gmail.com'
   });
@@ -200,7 +200,7 @@ function welcomeAfterPrologue_(email) {
   var html =
     '<div style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#1A1A1A;line-height:1.55;font-size:16px">' +
     '<p style="font-size:22px;font-weight:800;margin:24px 0 8px">You are on the list.</p>' +
-    '<p>You read chapter one, so you already know how the elevator ride ends. The rest of the book is the manual for what comes after you step off, and I will write once more when it is out in February 2027.</p>' +
+    '<p>You read chapter one, so you already know how the elevator ride ends. The rest of the book is the manual for what comes after you step off, and I will write when preorders open and again on February 23, 2027, the day it is out.</p>' +
     '<p>If you want chapter one again, it is here: <a href="' + SITE + '/prologue.html" style="color:#E4572E;font-weight:700">Blood in the Shoes</a>, or <a href="' + SITE + '/the-student-founder-chapter-one.pdf" style="color:#E4572E;font-weight:700">as a PDF</a> to keep or pass on.</p>' +
     '<p>Andrew</p>' +
     '<p style="color:#77726A;font-size:13px;margin-top:32px">You are getting this because you signed up at thestudentfounder.com. If that was not you, reply to this email and I will take you off.</p>' +
@@ -209,7 +209,7 @@ function welcomeAfterPrologue_(email) {
     to: email,
     subject: 'You are on the list',
     htmlBody: html,
-    body: 'You are on the list. I will write once more, in February 2027 when the book is out.\n\nChapter one is here: ' + SITE + '/prologue.html\n\nAndrew',
+    body: 'You are on the list. I will write when preorders open and again on February 23, 2027, the day the book is out.\n\nChapter one is here: ' + SITE + '/prologue.html\n\nAndrew',
     name: FROM_NAME,
     replyTo: 'andrewashur@gmail.com'
   });
